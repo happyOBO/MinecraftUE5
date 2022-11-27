@@ -18,36 +18,36 @@ AMinecraftUEHUD::AMinecraftUEHUD()
 
 void AMinecraftUEHUD::ApplyHUDChanges()
 {
-	///* 이전의 HUD를 삭제하고, 새 것을 적용한다.*/
-	//if (CurrentWidget != nullptr)
-	//{
-	//	CurrentWidget->RemoveFromParent();
-	//}
+	/* 이전의 HUD를 삭제하고, 새 것을 적용한다.*/
+	if (CurrentWidget != nullptr)
+	{
+		CurrentWidget->RemoveFromParent();
+	}
 
-	///* HUD 상태를 체크하고, 그에 상응하는 HUD 적용 */
-	//switch (HUDState)
-	//{
-	//case EHUDState::HS_Ingame:
-	//{
-	//	ApplyHUD(IngameHUDClass, false, false);
-	//	break;
-	//}
-	//case EHUDState::HS_Inventory:
-	//{
-	//	ApplyHUD(InventoryHUDClass, true, true);
-	//	break;
-	//}
-	//case EHUDState::HS_Craft_Menu:
-	//{
-	//	ApplyHUD(CraftMenuHUDClass, true, true);
-	//	break;
-	//}
-	//default:
-	//{
-	//	ApplyHUD(IngameHUDClass, false, false);
-	//	break;
-	//}
-	//}
+	/* HUD 상태를 체크하고, 그에 상응하는 HUD 적용 */
+	switch (HUDState)
+	{
+	case EHUDState::HS_Ingame:
+	{
+		ApplyHUD(IngameHUDClass, false, false);
+		break;
+	}
+	case EHUDState::HS_Inventory:
+	{
+		ApplyHUD(InventoryHUDClass, true, true);
+		break;
+	}
+	case EHUDState::HS_Craft_Menu:
+	{
+		ApplyHUD(CraftMenuHUDClass, true, true);
+		break;
+	}
+	default:
+	{
+		ApplyHUD(IngameHUDClass, false, false);
+		break;
+	}
+	}
 }
 
 uint8 AMinecraftUEHUD::GetHUDState()
@@ -66,27 +66,27 @@ void AMinecraftUEHUD::ChangeHUDState(uint8 NewState)
 	// ApplyHUDChanges();
 }
 
-//bool AMinecraftUEHUD::ApplyHUD(TSubclassOf<class UUserWidget> WidgetToApply, bool ShowMouseCursor, bool EnableClickEvents)
-//{
-//
-//	if (WidgetToApply != nullptr)
-//	{
-//		/* Set Mouse event and visibility */
-//		PlayerOwner->bShowMouseCursor = ShowMouseCursor;
-//		PlayerOwner->bEnableClickEvents = EnableClickEvents;
-//
-//		/* 위젯 생성 */
-//		CurrentWidget = CreateWidget<UUserWidget>(PlayerOwner, WidgetToApply);
-//
-//		if (CurrentWidget != nullptr)
-//		{
-//			CurrentWidget->AddToViewport();
-//			// CurrentWidget->AddToPlayerScreen();
-//			return true;
-//		}
-//		else
-//			return false;
-//	}
-//	else
-//		return false;
-//}
+bool AMinecraftUEHUD::ApplyHUD(TSubclassOf<class UUserWidget> WidgetToApply, bool ShowMouseCursor, bool EnableClickEvents)
+{
+
+	if (WidgetToApply != nullptr)
+	{
+		/* Set Mouse event and visibility */
+		PlayerOwner->bShowMouseCursor = ShowMouseCursor;
+		PlayerOwner->bEnableClickEvents = EnableClickEvents;
+
+		/* 위젯 생성 */
+		CurrentWidget = CreateWidget<UUserWidget, APlayerController>(PlayerOwner, WidgetToApply);
+
+		if (CurrentWidget != nullptr)
+		{
+			CurrentWidget->AddToViewport();
+			// CurrentWidget->AddToPlayerScreen();
+			return true;
+		}
+		else
+			return false;
+	}
+	else
+		return false;
+}
