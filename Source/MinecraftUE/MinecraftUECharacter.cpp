@@ -488,7 +488,7 @@ void AMinecraftUECharacter::PlayHitAnim()
 
 void AMinecraftUECharacter::CheckForBlocks()
 {
-	if (GetLocalRole() < ROLE_Authority)
+	if (GetNetMode() != NM_DedicatedServer)
 	{
 		FHitResult LinetraceHit;
 
