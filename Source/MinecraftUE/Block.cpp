@@ -38,6 +38,10 @@ void ABlock::Break()
 	}
 
 	++BreakingStage;
+	if (GetNetMode() == NM_Standalone)
+	{
+		OnRep_Breaking();
+	}
 	// SetBreakBlockMaterial();
 
 }
@@ -65,8 +69,6 @@ void ABlock::OnBroken(bool HasRequiredPickaxe)
 
 void ABlock::OnRep_Breaking()
 {
-	if (GetLocalRole() == ROLE_Authority)
-		return;
 
 	SetBreakBlockMaterial();
 

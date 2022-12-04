@@ -523,16 +523,14 @@ void AMinecraftUECharacter::CheckForBlocks()
 
 void AMinecraftUECharacter::BreakBlock()
 {
-	if (GetLocalRole() < ROLE_Authority)
+	if (GetNetMode() != NM_DedicatedServer)
 	{
 		if (bIsBreaking && CurrentBlock != nullptr && !CurrentBlock->IsPendingKill())
 		{
 			ServerBreakBlock(CurrentBlock);
 
 		}
-
 	}
-		
 }
 
 void AMinecraftUECharacter::UpdatePossibleCraftWeildable()
@@ -559,8 +557,5 @@ void AMinecraftUECharacter::UpdatePossibleCraftWeildable()
 
 void AMinecraftUECharacter::ServerBreakBlock_Implementation(ABlock* block)
 {
-	if(GetLocalRole() == ROLE_Authority)
-	{
-		block->Break();
-	}
+	block->Break();
 }
