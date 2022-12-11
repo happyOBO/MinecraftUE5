@@ -450,7 +450,12 @@ void AMinecraftUECharacter::OnHit()
 	if (CurrentBlock != nullptr)
 	{
 		bIsBreaking = true;
-		float TimerBetweenBreaks = ((CurrentBlock->Resistance) / 100.0f) / 2; // 2, CurrenctTool->Power
+		float TimerBetweenBreaks = 1.f;
+		AWieldable* CurrentWieldableItem = GetCurrentWieldableItem();
+		if (CurrentWieldableItem)
+		{
+			TimerBetweenBreaks = FMath::Max(CurrentWieldableItem->ToolSpeed, 0.1f);
+		}
 		// 타이머 지정 , 1. 블럭 깨지는 시간 2. 플레이어 스윙 애니메이션 유지 시간
 		GetWorld()->GetTimerManager().SetTimer(BlockBreakingHandle, this, &AMinecraftUECharacter::BreakBlock, TimerBetweenBreaks, true);
 		GetWorld()->GetTimerManager().SetTimer(HitAnimHandle, this, &AMinecraftUECharacter::PlayHitAnim, 0.4f, true); // 스윙질 할때 클릭 빨리누르던 느리게 누르던 0.4초로 고정
@@ -527,7 +532,7 @@ void AMinecraftUECharacter::BreakBlock()
 	{
 		if (bIsBreaking && CurrentBlock != nullptr && !CurrentBlock->IsPendingKill())
 		{
-			ServerBreakBlock(CurrentBlock);
+			ServerBreakBlock(CurrentBlock, GetCurrentWieldableItem());
 
 		}
 	}
@@ -555,7 +560,17 @@ void AMinecraftUECharacter::UpdatePossibleCraftWeildable()
 
 }
 
-void AMinecraftUECharacter::ServerBreakBlock_Implementation(ABlock* block)
+void AMinecraftUECharacter::ServerBreakBlock_Implementation(ABlock* block, AWieldable* CurrentWieldable)
 {
-	block->Break();
+	block->Break(CurrentWieldable);
+}
+
+
+AWieldable* AMinecraftUECharacter::GetCurrentWieldableItem()
+{
+	if (0 <= CurrentInventorySlot && NUM_OF_INVENTORY_SHORTCUT_SLOTS < CurrentInventorySlot)
+	{
+		return Inventory[CurrentInventorySlot];
+	}
+	return nullptr;
 }

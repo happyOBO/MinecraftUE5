@@ -6,7 +6,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Net/UnrealNetwork.h"
-
+#include "Wieldable.h"
 #include "Block.generated.h"
 
 UCLASS()
@@ -24,7 +24,7 @@ public:
 	virtual void BeginPlay() override;
 
 	/* 블럭을 깰 때 호출 */
-	void Break();
+	void Break(AWieldable* WieldableItem);
 	/* 블럭을 깨려다가 말때 호출 */
 	void ResetBlock();
 
@@ -47,14 +47,15 @@ public:
 	// 깨질수 있는 최소 도구
 	uint8 MinimumMaterial = 3;
 
-	UPROPERTY(EditDefaultsOnly)
-	float Resistance;
+	UPROPERTY(EditAnywhere)
+	float DefaultBreakingStage;
 
 	UPROPERTY(VisibleInstanceOnly, ReplicatedUsing = OnRep_Breaking)
 	float BreakingStage;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Blueprint Wieldable Block", Meta = (BlueprintProtected = "true"))
 	TSubclassOf<class AActor> WieldableBlock;
+
 
 
 };

@@ -262,7 +262,10 @@ public:
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
 
 	UFUNCTION(Server, Reliable)
-	void ServerBreakBlock(ABlock* block);
+	void ServerBreakBlock(ABlock* block, AWieldable* CurrentWieldable);
+
+	AWieldable* GetCurrentWieldableItem();
+
 
 };
 

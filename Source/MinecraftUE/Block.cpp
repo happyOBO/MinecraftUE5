@@ -9,8 +9,8 @@ ABlock::ABlock()
 {
 	bReplicates = true;
 	SM_Block = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BlockMesh"));
-	Resistance = 20.0f;
-	BreakingStage = 0.0f;
+	DefaultBreakingStage = 10.f;
+	BreakingStage = DefaultBreakingStage;
 	MinimumMaterial = 0;
 	SetRemoteRoleForBackwardsCompat(ROLE_SimulatedProxy);
 
@@ -30,14 +30,22 @@ void ABlock::BeginPlay()
 }
 
 
-void ABlock::Break()
+void ABlock::Break(AWieldable* WieldableItem)
 {
-	if (BreakingStage == 5.0f)
+	if (BreakingStage <= 0.f)
 	{
 		OnBroken(true);
 	}
 
-	++BreakingStage;
+	else if (WieldableItem && 0.f < WieldableItem->ToolPower)
+	{
+		BreakingStage = FMath::Min(DefaultBreakingStage, BreakingStage - (1.0f + WieldableItem->ToolPower));
+	}
+	else
+	{
+		BreakingStage -= 1.0f;
+	}
+
 	if (GetNetMode() == NM_Standalone)
 	{
 		OnRep_Breaking();
@@ -48,7 +56,7 @@ void ABlock::Break()
 
 void ABlock::ResetBlock()
 {
-	BreakingStage = 0.0f;
+	BreakingStage = DefaultBreakingStage;
 	UMaterialInstanceDynamic* MatInstance = SM_Block->CreateDynamicMaterialInstance(0);
 
 	if (MatInstance != nullptr)
@@ -63,8 +71,6 @@ void ABlock::OnBroken(bool HasRequiredPickaxe)
 	GetWorld()->SpawnActor<AActor>(WieldableBlock, GetActorLocation(), GetActorRotation());
 
 	Destroy();
-	
-
 }
 
 void ABlock::OnRep_Breaking()
@@ -73,7 +79,7 @@ void ABlock::OnRep_Breaking()
 	SetBreakBlockMaterial();
 
 	UE_LOG(LogTemp, Warning, TEXT("OnRep_Breaking %f"), BreakingStage);
-	if (BreakingStage == 5.0f)
+	if (BreakingStage <= 0.f)
 	{
 		OnBroken(true);
 	}
@@ -82,15 +88,14 @@ void ABlock::OnRep_Breaking()
 
 void ABlock::SetBreakBlockMaterial()
 {
-	float CrackingValue = 1.0f - (BreakingStage / 5.0f); // 1 0.9 ... 0.1
+	float CrackingValue = BreakingStage / DefaultBreakingStage; // 1 0.9 ... 0.1
+	UE_LOG(LogTemp, Warning, TEXT("SetBreakBlockMaterial %f"), BreakingStage);
 	UMaterialInstanceDynamic* MatInstance = SM_Block->CreateDynamicMaterialInstance(0);
 
 	if (MatInstance != nullptr)
 	{
 		MatInstance->SetScalarParameterValue(FName("CrackingValue"), CrackingValue);
 	}
-
-
 }
 
 

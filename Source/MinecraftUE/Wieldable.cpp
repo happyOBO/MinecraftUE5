@@ -21,7 +21,8 @@ AWieldable::AWieldable()
 
 	MaterialType = EMaterial::None;
 	ToolType = ETool::Unarmed;
-
+	ToolPower = 1.0f;
+	ToolSpeed = 1.0f;
 	bIsActive = true;
 }
 

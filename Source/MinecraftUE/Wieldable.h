@@ -50,6 +50,12 @@ public:
 	uint8 MaterialType;
 
 	UPROPERTY(EditAnywhere)
+	float ToolPower;
+
+	UPROPERTY(EditAnywhere)
+	float ToolSpeed;
+
+	UPROPERTY(EditAnywhere)
 	USkeletalMeshComponent* WieldableMesh;
 
 	UPROPERTY(EditAnywhere)
