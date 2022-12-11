@@ -8,7 +8,7 @@
 // Sets default values
 AWieldable::AWieldable()
 {
-	// ¸Å ÇÁ·¹ÀÓ¸¶´Ù tick ÇÔ¼ö¸¦ ½ÇÇàÇÒ°ÇÁö À¯¹«
+	// ë§¤ í”„ë ˆìž„ë§ˆë‹¤ tick í•¨ìˆ˜ë¥¼ ì‹¤í–‰í• ê±´ì§€ ìœ ë¬´
 	PrimaryActorTick.bCanEverTick = true;
 
 	WieldableMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WieldableMesh"));
@@ -38,7 +38,7 @@ void AWieldable::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	FRotator rotation = WieldableMesh->GetComponentRotation();
 	rotation.Yaw += 1.0f;
-	// 1µµ¾¿ È¸Àü
+	// 1ë„ì”© íšŒì „
 	WieldableMesh->SetRelativeRotation(rotation);
 }
 

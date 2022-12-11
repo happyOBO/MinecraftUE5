@@ -85,47 +85,47 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	uint8 bUsingMotionControllers : 1;
 
-	/* ÀÎº¥Åä¸® HUDÀÇ ÇöÀç ½½·Ô ¾ò±â*/
+	/* ì¸ë²¤í† ë¦¬ HUDì˜ í˜„ì¬ ìŠ¬ë¡¯ ì–»ê¸°*/
 	UFUNCTION(BlueprintPure, Category = HUD)
 	int32 GetCurrentInventorySlot();
 
-	/* ÀÎº¥Åä¸®¿¡ ¾ÆÀÌÅÛ Ãß°¡ */
+	/* ì¸ë²¤í† ë¦¬ì— ì•„ì´í…œ ì¶”ê°€ */
 	UFUNCTION(BlueprintCallable, Category = Inventory)
 	bool AddItemToInventory(AWieldable* Item);
 
-	/* ÀÎº¥Åä¸®¿¡ ¾ÆÀÌÅÛ »èÁ¦ */
+	/* ì¸ë²¤í† ë¦¬ì— ì•„ì´í…œ ì‚­ì œ */
 	UFUNCTION(BlueprintCallable, Category = Inventory)
 	bool RemoveItemToInventory(int idx);
 
-	/* ÁÖ¾îÁø ¾ÆÀÌÅÛ ½æ³×ÀÏ °¡Á®¿À±â */
+	/* ì£¼ì–´ì§„ ì•„ì´í…œ ì¸ë„¤ì¼ ê°€ì ¸ì˜¤ê¸° */
 	UFUNCTION(BlueprintPure, Category = Inventory)
 	UTexture2D* GetThumbnailAtInventorySlot(uint8 Slot);
 
-	/* ÁÖ¾îÁø ¾ÆÀÌÅÛ ½æ³×ÀÏ °¡Á®¿À±â */
+	/* ì£¼ì–´ì§„ ì•„ì´í…œ ì¸ë„¤ì¼ ê°€ì ¸ì˜¤ê¸° */
 	UFUNCTION(BlueprintPure, Category = Inventory)
 	UTexture2D* GetThumbnailAtCraftInventorySlot(uint8 Slot);
 
-	/* ÁÖ¾îÁø ¾ÆÀÌÅÛ ½æ³×ÀÏ °¡Á®¿À±â */
+	/* ì£¼ì–´ì§„ í˜„ì¬ ì•„ì´í…œ ì¸ë„¤ì¼ ê°€ì ¸ì˜¤ê¸° */
 	UFUNCTION(BlueprintPure, Category = Inventory)
 	UTexture2D* GetThumbnailAtPossibleCraftWeildable();
 
-	/* ÃÑ ÀÎº¥Åä¸® ½½·Ô °³¼ö ¹İÈ¯ */
+	/* ì´ ì¸ë²¤í† ë¦¬ ìŠ¬ë¡¯ ê°œìˆ˜ ë°˜í™˜ */
 	UFUNCTION(BlueprintPure, Category = Inventory)
 	int32 GetNumberOfInventorySlot();
 
-	/* ÃÑ Craft ÀÎº¥Åä¸® ½½·Ô °³¼ö ¹İÈ¯ */
+	/* ì´ Craft ì¸ë²¤í† ë¦¬ ìŠ¬ë¡¯ ê°œìˆ˜ ë°˜í™˜ */
 	UFUNCTION(BlueprintPure, Category = Inventory)
 	int32 GetNumberOfCraftInventorySlot();
 
-	/* ÀÎº¥Åä¸®¿¡¼­ Craft ÀÎº¥Åä¸®·Î ÀÌµ¿*/
+	/* ì¸ë²¤í† ë¦¬ì—ì„œ Craft ì¸ë²¤í† ë¦¬ë¡œ ì´ë™*/
 	UFUNCTION(BlueprintCallable, Category = Inventory)
 	bool MoveToCraftInventory(uint8 fromInventoryIdx , uint8 toCraftInventoryIdx);
 
-	/* Craft ÀÎº¥Åä¸®¿¡¼­ ÀÎº¥Åä¸®·Î ÀÌµ¿*/
+	/* Craft ì¸ë²¤í† ë¦¬ì—ì„œ ì¸ë²¤í† ë¦¬ë¡œ ì´ë™*/
 	UFUNCTION(BlueprintCallable, Category = Inventory)
 	bool MoveToInventory(uint8 fromCraftInventoryIdx);
 
-	/* CraftµÈ ¾ÆÀÌÅÛ ÀÎº¥Åä¸®·Î ÀÌµ¿*/
+	/* Craftëœ ì•„ì´í…œ ì¸ë²¤í† ë¦¬ë¡œ ì´ë™*/
 	UFUNCTION(BlueprintCallable, Category = Inventory)
 	bool GetCraftWeidable(uint8 toInventoryIdx);
 
@@ -186,58 +186,58 @@ protected:
 
 
 private:
-	/* ÀÎº¥Åä¸® ¼îÆ® ÄÆ ½½·Ô °³¼ö */
+	/* ì¸ë²¤í† ë¦¬ ì‡¼íŠ¸ ì»· ìŠ¬ë¡¯ ê°œìˆ˜ */
 	const int32 NUM_OF_INVENTORY_SHORTCUT_SLOTS = 9;
-	/* ÀÎº¥Åä¸® ½½·Ô °³¼ö */
+	/* ì¸ë²¤í† ë¦¬ ìŠ¬ë¡¯ ê°œìˆ˜ */
 	const int32 NUM_OF_INVENTORY_SLOTS = 36;
 
 	const int32 NUM_OF_CRAFT_INVENTORY_SLOTS = 9;
 
-	/* ÇöÀç ÀÎº¥Åä¸® ½½·Ô idx */
+	/* í˜„ì¬ ì¸ë²¤í† ë¦¬ ìŠ¬ë¡¯ idx */
 	int32 CurrentInventorySlot;
 
-	/* Wield ¾ÆÀÌÅÛ ¾÷µ¥ÀÌÆ® */
+	/* Wield ì•„ì´í…œ ì—…ë°ì´íŠ¸ */
 	void UpdateWieldedItem();
 
-	/* ÇöÀç Wield ¾ÆÀÌÅÛ ¹İÈ¯ */
+	/* í˜„ì¬ Wield ì•„ì´í…œ ë°˜í™˜ */
 	AWieldable* GetCurrentlyWieldedItem();
 
-	/* ÇöÀç Wield ¾ÆÀÌÅÛ ¹ö¸®±â */
+	/* í˜„ì¬ Wield ì•„ì´í…œ ë²„ë¦¬ê¸° */
 	void Throw();
 
-	/* HUD ¸ğµå CraftMenu·Î º¯°æ */
+	/* HUD ëª¨ë“œ CraftMenuë¡œ ë³€ê²½ */
 	void OpenCraftMenu();
 
-	/* ÀÎº¥Åä¸® ½½·Ô ÀÌµ¿ */
+	/* ì¸ë²¤í† ë¦¬ ìŠ¬ë¡¯ ì´ë™ */
 	void MoveUpInventorySlot();
 	void MoveDownInventorySlot();
 
-	/* ÂüÀÌ¸é, ºí·° ±ú±â */
+	/* ì°¸ì´ë©´, ë¸”ëŸ­ ê¹¨ê¸° */
 	bool bIsBreaking;
 
 	/* Called when hitting with a tool */
 	void OnHit();
 	void EndHIt();
 
-	/* Ä³´Â ¾Ö´Ï¸ŞÀÌ¼Ç ½ÇÇà */
+	/* ìºëŠ” ì• ë‹ˆë©”ì´ì…˜ ì‹¤í–‰ */
 	void PlayHitAnim();
 
-	/* ÇÃ·¹ÀÌ¾î ¾Õ¿¡ ºí·°ÀÌ ÀÖ´ÂÁö È®ÀÎ */
+	/* í”Œë ˆì´ì–´ ì•ì— ë¸”ëŸ­ì´ ìˆëŠ”ì§€ í™•ì¸ */
 	void CheckForBlocks();
 
-	/* ºí·°À» ±ú±â¸¦ ¿øÇÒ ¶§ È£Ãâ */
+	/* ë¸”ëŸ­ì„ ê¹¨ê¸°ë¥¼ ì›í•  ë•Œ í˜¸ì¶œ */
 	void BreakBlock();
 
-	/* ÇÃ·¹ÀÌ¾î°¡ ÇöÀç ¹Ù¶óº¸°í ÀÖ´Â ºí·° ÀúÀå */
+	/* í”Œë ˆì´ì–´ê°€ í˜„ì¬ ë°”ë¼ë³´ê³  ìˆëŠ” ë¸”ëŸ­ ì €ì¥ */
 	ABlock* CurrentBlock;
 
-	/* ºí·° Ã¼Å© °Å¸® */
+	/* ë¸”ëŸ­ ì²´í¬ ê±°ë¦¬ */
 	float Reach;
 
 	void UpdatePossibleCraftWeildable();
 
 	/* Timer handles */
-	FTimerHandle BlockBreakingHandle; // µµ±¸¿¡ µû¶ó °É¸®´Â ½Ã°£ÀÌ ´Ù¸¦ °ÍÀÓ
+	FTimerHandle BlockBreakingHandle; // ë„êµ¬ì— ë”°ë¼ ê±¸ë¦¬ëŠ” ì‹œê°„ì´ ë‹¤ë¥¼ ê²ƒì„
 	FTimerHandle HitAnimHandle;
 
 	UPROPERTY(EditAnywhere)
@@ -246,11 +246,11 @@ private:
 	UPROPERTY(EditAnywhere)
 	TArray<AWieldable*> CraftInventory;
 
-	/* ÇöÀç Craft Tool ·Î ¸¸µé ¼ö ÀÖ´Â Weildable*/
+	/* í˜„ì¬ Craft Tool ë¡œ ë§Œë“¤ ìˆ˜ ìˆëŠ” Weildable*/
 	TSubclassOf<class AWieldable> PossibleWieldable;
 
 public: 
-	/* ÇÃ·¹ÀÌ¾î°¡ »ç¿ëÇÏ´Â µµ±¸ À¯Çü ¹× µî±Ş */
+	/* í”Œë ˆì´ì–´ê°€ ì‚¬ìš©í•˜ëŠ” ë„êµ¬ ìœ í˜• ë° ë“±ê¸‰ */
 	uint8 ToolType;
 	uint8 MaterialType;
 

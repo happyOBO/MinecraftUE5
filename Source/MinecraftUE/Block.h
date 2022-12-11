@@ -23,12 +23,12 @@ public:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	/* ºí·°À» ±ı ¶§ È£Ãâ */
+	/* ë¸”ëŸ­ì„ ê¹° ë•Œ í˜¸ì¶œ */
 	void Break();
-	/* ºí·°À» ±ú·Á´Ù°¡ ¸»¶§ È£Ãâ */
+	/* ë¸”ëŸ­ì„ ê¹¨ë ¤ë‹¤ê°€ ë§ë•Œ í˜¸ì¶œ */
 	void ResetBlock();
 
-	/* breaking stage°¡ ¸¶Áö¸· ´Ü°èÀÏ ¶§ ÂğÀ¸·Î ±úÁö´Â ÇÔ¼ö È£Ãâ*/
+	/* breaking stageê°€ ë§ˆì§€ë§‰ ë‹¨ê³„ì¼ ë•Œ ì°ìœ¼ë¡œ ê¹¨ì§€ëŠ” í•¨ìˆ˜ í˜¸ì¶œ*/
 	// UFUNCTION(Server, Reliable)
 	void OnBroken(bool HasRequiredPickaxe);
 
@@ -40,11 +40,11 @@ public:
 
 
 public:
-	// ºí·°ÀÌ ¸ğµÎ Å¥ºê ½ºµ’Æ½ ¸Ş½Ã¸¦ °®±â À§ÇØ ¼³Á¤
+	// ë¸”ëŸ­ì´ ëª¨ë‘ íë¸Œ ìŠ¤í…Œí‹± ë©”ì‹œë¥¼ ê°–ê¸° ìœ„í•´ ì„¤ì •
 	UPROPERTY(EditDefaultsOnly)
 	UStaticMeshComponent* SM_Block;
 
-	// ±úÁú¼ö ÀÖ´Â ÃÖ¼Ò µµ±¸
+	// ê¹¨ì§ˆìˆ˜ ìˆëŠ” ìµœì†Œ ë„êµ¬
 	uint8 MinimumMaterial = 3;
 
 	UPROPERTY(EditDefaultsOnly)

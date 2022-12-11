@@ -250,7 +250,7 @@ bool AMinecraftUECharacter::GetCraftWeidable(uint8 toInventoryIdx)
 	if (NUM_OF_INVENTORY_SLOTS <= toInventoryIdx || toInventoryIdx < 0)
 		return false;
 
-	// ¹Ù·Î ½ºÆù µÇÀÚ¸¶ÀÚ ¿À¹ö·¦ µÇ¾î¼­ ÀÎº¥Åä¸®¿¡ µÎ°³°¡ Ãß°¡µÇ¾î ¸ÖÂïÀÌ ½ºÆù ½ÃÅ´(¼öÁ¤ ÇÊ¿ä)
+	// ë°”ë¡œ ìŠ¤í° ë˜ìžë§ˆìž ì˜¤ë²„ëž© ë˜ì–´ì„œ ì¸ë²¤í† ë¦¬ì— ë‘ê°œê°€ ì¶”ê°€ë˜ì–´ ë©€ì°ì´ ìŠ¤í° ì‹œí‚´(ìˆ˜ì • í•„ìš”)
 	FVector location = GetActorLocation();
 	location.X += 100.0f;
 	auto CraftItem = Cast<AWieldable>(GetWorld()->SpawnActor<AActor>(PossibleWieldable, location, GetActorRotation()));
@@ -374,7 +374,7 @@ void AMinecraftUECharacter::Throw()
 {
 	AWieldable* ItemToThrow = GetCurrentlyWieldedItem();
 
-	// ´øÁ® ¹ö¸± À§Ä¡ °è»ê
+	// ë˜ì ¸ ë²„ë¦´ ìœ„ì¹˜ ê³„ì‚°
 	FHitResult LinetraceHit;
 
 	FVector StartTrace = FirstPersonCameraComponent->GetComponentLocation();
@@ -451,9 +451,9 @@ void AMinecraftUECharacter::OnHit()
 	{
 		bIsBreaking = true;
 		float TimerBetweenBreaks = ((CurrentBlock->Resistance) / 100.0f) / 2; // 2, CurrenctTool->Power
-		// Å¸ÀÌ¸Ó ÁöÁ¤ , 1. ºí·° ±úÁö´Â ½Ã°£ 2. ÇÃ·¹ÀÌ¾î ½ºÀ® ¾Ö´Ï¸ÞÀÌ¼Ç À¯Áö ½Ã°£
+		// íƒ€ì´ë¨¸ ì§€ì • , 1. ë¸”ëŸ­ ê¹¨ì§€ëŠ” ì‹œê°„ 2. í”Œë ˆì´ì–´ ìŠ¤ìœ™ ì• ë‹ˆë©”ì´ì…˜ ìœ ì§€ ì‹œê°„
 		GetWorld()->GetTimerManager().SetTimer(BlockBreakingHandle, this, &AMinecraftUECharacter::BreakBlock, TimerBetweenBreaks, true);
-		GetWorld()->GetTimerManager().SetTimer(HitAnimHandle, this, &AMinecraftUECharacter::PlayHitAnim, 0.4f, true); // ½ºÀ®Áú ÇÒ¶§ Å¬¸¯ »¡¸®´©¸£´ø ´À¸®°Ô ´©¸£´ø 0.4ÃÊ·Î °íÁ¤
+		GetWorld()->GetTimerManager().SetTimer(HitAnimHandle, this, &AMinecraftUECharacter::PlayHitAnim, 0.4f, true); // ìŠ¤ìœ™ì§ˆ í• ë•Œ í´ë¦­ ë¹¨ë¦¬ëˆ„ë¥´ë˜ ëŠë¦¬ê²Œ ëˆ„ë¥´ë˜ 0.4ì´ˆë¡œ ê³ ì •
 	
 	}
 }
@@ -496,13 +496,13 @@ void AMinecraftUECharacter::CheckForBlocks()
 		FVector EndTrace = (FirstPersonCameraComponent->GetForwardVector() * Reach) + StartTrace;
 
 		FCollisionQueryParams CQP;
-		CQP.AddIgnoredActor(this); // ÇÃ·¹ÀÌ¾î´Â raycast¿¡ ¹«½Ã
+		CQP.AddIgnoredActor(this); // í”Œë ˆì´ì–´ëŠ” raycastì— ë¬´ì‹œ
 	
 		GetWorld()->LineTraceSingleByChannel(LinetraceHit, StartTrace, EndTrace, ECollisionChannel::ECC_WorldDynamic, CQP);
 
 		ABlock* PotentialBlock = Cast<ABlock>(LinetraceHit.GetActor());
 	
-		if (PotentialBlock != CurrentBlock && CurrentBlock != nullptr) // ºí·°ÀÌ ±úÁö±â Àü¿¡ ´Ù¸¥ ºí·°À¸·Î ½Ã¼±ÀÌ ÀÌµ¿µÇ¾úÀ» ¶§
+		if (PotentialBlock != CurrentBlock && CurrentBlock != nullptr)// ë¸”ëŸ­ì´ ê¹¨ì§€ê¸° ì „ì— ë‹¤ë¥¸ ë¸”ëŸ­ìœ¼ë¡œ ì‹œì„ ì´ ì´ë™ë˜ì—ˆì„ ë•Œ
 		{
 			CurrentBlock->ResetBlock();
 		}
