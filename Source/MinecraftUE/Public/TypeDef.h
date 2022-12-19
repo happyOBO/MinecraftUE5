@@ -30,8 +30,8 @@ public:
 		int32 AdditionalHP;
 
 	/** 업적에 사용할 아이콘입니다. */
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = LevelUp)
-	//	TSoftObjectPtr<UTexture> AchievementIcon;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = LevelUp)
+	TArray<int32> arrayTest;
 };
 
 
