@@ -530,10 +530,9 @@ void AMinecraftUECharacter::BreakBlock()
 {
 	if (GetNetMode() != NM_DedicatedServer)
 	{
-		if (bIsBreaking && CurrentBlock != nullptr && !CurrentBlock->IsPendingKill())
+		if (bIsBreaking && CurrentBlock != nullptr && IsValid(CurrentBlock))
 		{
 			ServerBreakBlock(CurrentBlock, GetCurrentWieldableItem());
-
 		}
 	}
 }
