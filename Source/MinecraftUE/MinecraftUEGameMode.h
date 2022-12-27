@@ -17,11 +17,13 @@ public:
 	AMinecraftUEGameMode();
 
 	UPROPERTY()
-	TMap<FString, TSoftObjectPtr<AWieldable>> WieldableInfo;
+	TMap<FString, FString> WieldableInfo;
 protected:
 	virtual void BeginPlay() override;
 	UDataTable* LoadObjFromPath(const FName& Path);
 	void LoadWieldableInfo();
+
+	AWieldable* GetWieldableItem(FString ID);
 
 };
 

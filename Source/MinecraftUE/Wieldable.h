@@ -72,4 +72,11 @@ public:
 	void Hide(bool bVis);
 
 	void OnUsed();
+
+	UFUNCTION()
+	FString GetID() { return ID; }
+
+protected:
+	UPROPERTY(EditAnywhere)
+	FString ID;
 };

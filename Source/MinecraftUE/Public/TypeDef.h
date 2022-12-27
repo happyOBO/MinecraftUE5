@@ -21,6 +21,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Wieldable)
 	FString ID;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Wieldable)
-	TSoftObjectPtr<AWieldable> WieldableItem;
+	FString WieldableItemPath;
 };
 

@@ -44,8 +44,13 @@ void AMinecraftUEGameMode::LoadWieldableInfo()
 
 	for (int32 i = 0; i < WieldableInfoTable.Num(); i++)
 	{
-		WieldableInfo.FindOrAdd(WieldableInfoTable[i]->ID,WieldableInfoTable[i]->WieldableItem);
+		WieldableInfo.FindOrAdd(WieldableInfoTable[i]->ID,WieldableInfoTable[i]->WieldableItemPath);
 	}
 
 	UE_LOG(LogTemp, Warning, TEXT("[jeongmj] WieldableInfo.Num() %d"), WieldableInfo.Num());
+}
+
+AWieldable* AMinecraftUEGameMode::GetWieldableItem(FString ID)
+{
+	return nullptr;
 }
