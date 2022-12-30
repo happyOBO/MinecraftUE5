@@ -16,10 +16,12 @@ struct FWieldableData : public FTableRowBase
 public:
 
 	FWieldableData()
-		: ID("000")
+		: ID(0), Recipe("")
 	{}
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Wieldable)
-	FString ID;
+	int32 ID;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Wieldable)
+	FString Recipe;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Wieldable)
 	FString WieldableItemPath;
 };

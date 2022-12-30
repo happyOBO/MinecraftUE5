@@ -45,12 +45,41 @@ void AMinecraftUEGameMode::LoadWieldableInfo()
 	for (int32 i = 0; i < WieldableInfoTable.Num(); i++)
 	{
 		WieldableInfo.FindOrAdd(WieldableInfoTable[i]->ID,WieldableInfoTable[i]->WieldableItemPath);
+		if(0 < WieldableInfoTable[i]->Recipe.Len() )
+			WieldableItemRecipe.FindOrAdd(WieldableInfoTable[i]->Recipe, WieldableInfoTable[i]->ID);
 	}
 
 	UE_LOG(LogTemp, Warning, TEXT("[jeongmj] WieldableInfo.Num() %d"), WieldableInfo.Num());
 }
 
-AWieldable* AMinecraftUEGameMode::GetWieldableItem(FString ID)
+
+
+AWieldable* AMinecraftUEGameMode::GetWieldableItemFromID(int32 ID)
 {
+	if (!WieldableInfo.Contains(ID)) return nullptr;
+	FString ItemPath = WieldableInfo[ID];
+	return LoadObject<AWieldable>(NULL, *ItemPath, NULL, LOAD_None, NULL);
+}
+
+
+TSubclassOf<AWieldable> AMinecraftUEGameMode::GetWieldableItemClassFromID(int32 ID)
+{
+	if (!WieldableInfo.Contains(ID)) return nullptr;
+	FString ItemPath = WieldableInfo[ID];
+	static ConstructorHelpers::FClassFinder<AWieldable> WieldableClassAsset(*ItemPath);
+	if (WieldableClassAsset.Succeeded())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("[jeongmj] GetWieldableItemClassFromID %d"), ID);
+		return WieldableClassAsset.Class;
+	}
+
 	return nullptr;
 }
+
+int32 AMinecraftUEGameMode::GetWieldableItemIDFromRecipe(FString Recipe)
+{
+	if (!WieldableItemRecipe.Contains(Recipe)) return -1;
+	UE_LOG(LogTemp, Warning, TEXT("[jeongmj] GetWieldableItemIDFromRecipe %s"), *Recipe);
+	return WieldableItemRecipe[Recipe];
+}
+

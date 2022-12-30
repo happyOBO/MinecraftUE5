@@ -74,9 +74,9 @@ public:
 	void OnUsed();
 
 	UFUNCTION()
-	FString GetID() { return ID; }
+	int32 GetID() { return ID; }
 
 protected:
 	UPROPERTY(EditAnywhere)
-	FString ID;
+	int32 ID;
 };

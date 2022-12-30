@@ -6,6 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "Engine/DataTable.h"
 #include "TypeDef.h"
+#include "Wieldable.h"
 #include "MinecraftUEGameMode.generated.h"
 
 UCLASS(minimalapi)
@@ -17,13 +18,19 @@ public:
 	AMinecraftUEGameMode();
 
 	UPROPERTY()
-	TMap<FString, FString> WieldableInfo;
+	TMap<int32, FString> WieldableInfo;
+	UPROPERTY()
+	TMap<FString, int32> WieldableItemRecipe;
+
+	AWieldable* GetWieldableItemFromID(int32 ID);
+	TSubclassOf<AWieldable> GetWieldableItemClassFromID(int32 ID);
+	int32 GetWieldableItemIDFromRecipe(FString Recipe);
+
 protected:
 	virtual void BeginPlay() override;
 	UDataTable* LoadObjFromPath(const FName& Path);
 	void LoadWieldableInfo();
 
-	AWieldable* GetWieldableItem(FString ID);
 
 };
 

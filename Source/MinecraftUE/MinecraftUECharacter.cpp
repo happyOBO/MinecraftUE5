@@ -13,6 +13,7 @@
 #include "XRMotionControllerBase.h" // for FXRMotionControllerBase::RightHandSourceId
 #include "MinecraftUEGameMode.h"
 #include "CraftCreatorComponent.h"
+#include "Kismet/KismetSystemLibrary.h"
 #include "MinecraftUEHUD.h"
 
 
@@ -539,24 +540,34 @@ void AMinecraftUECharacter::BreakBlock()
 
 void AMinecraftUECharacter::UpdatePossibleCraftWeildable()
 {
+	UWorld* const World = GetWorld();
+	if (World == nullptr) return;
+
+	AMinecraftUEGameMode* MGameMode = Cast<AMinecraftUEGameMode>(UGameplayStatics::GetGameMode(World));
+	if (MGameMode == nullptr) return;
+
 	FString CraftInputs;
 	for (int i = 0; i < NUM_OF_CRAFT_INVENTORY_SLOTS; i++)
 	{
 		if (CraftInventory[i] == nullptr)
-			CraftInputs += TEXT("00");
+			CraftInputs += TEXT("0");
 		else
-		{
-			CraftInputs += FString::FromInt(CraftInventory[i]->ToolType);
-			CraftInputs += FString::FromInt(CraftInventory[i]->MaterialType);
-		}
+			CraftInputs += FString::FromInt(CraftInventory[i]->GetID());
+		CraftInputs += TEXT("/");
 	}
-	auto CraftWieldable = CraftCreator->GetWeidableFromID(CraftInputs);
-	if (CraftWieldable == NULL)
-		PossibleWieldable = nullptr;
-	else
-		PossibleWieldable = CraftWieldable;
-	
 
+	if (CraftInputs.Len() <= 0) return;
+
+	UE_LOG(LogTemp, Warning, TEXT("[jeongmj] UpdatePossibleCraftWeildable %s"), *CraftInputs);
+
+	int32 CraftWieldableItemID = MGameMode->GetWieldableItemIDFromRecipe(CraftInputs);
+
+	if (CraftWieldableItemID <= 0)
+	{
+		PossibleWieldable = nullptr;
+		return;
+	}
+	MGameMode->GetWieldableItemClassFromID(CraftWieldableItemID);
 }
 
 void AMinecraftUECharacter::ServerBreakBlock_Implementation(ABlock* block, AWieldable* CurrentWieldable)

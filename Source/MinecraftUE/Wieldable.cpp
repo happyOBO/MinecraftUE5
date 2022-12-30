@@ -24,7 +24,7 @@ AWieldable::AWieldable()
 	ToolPower = 1.0f;
 	ToolSpeed = 1.0f;
 	bIsActive = true;
-	ID = "000";
+	ID = 0;
 }
 
 // Called when the game starts or when spawned
