@@ -562,6 +562,7 @@ void AMinecraftUECharacter::UpdatePossibleCraftWeildable()
 
 	int32 CraftWieldableItemID = MGameMode->GetWieldableItemIDFromRecipe(CraftInputs);
 
+	UE_LOG(LogTemp, Warning, TEXT("[jeongmj] CraftWieldableItemID %d"), CraftWieldableItemID);
 	if (CraftWieldableItemID <= 0)
 	{
 		PossibleWieldable = nullptr;

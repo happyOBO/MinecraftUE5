@@ -78,6 +78,10 @@ TSubclassOf<AWieldable> AMinecraftUEGameMode::GetWieldableItemClassFromID(int32 
 
 int32 AMinecraftUEGameMode::GetWieldableItemIDFromRecipe(FString Recipe)
 {
+	for (auto& recipePair : WieldableItemRecipe)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("[jeongmj] %s %d"),*(recipePair.Key), recipePair.Value);
+	}
 	if (!WieldableItemRecipe.Contains(Recipe)) return -1;
 	UE_LOG(LogTemp, Warning, TEXT("[jeongmj] GetWieldableItemIDFromRecipe %s"), *Recipe);
 	return WieldableItemRecipe[Recipe];

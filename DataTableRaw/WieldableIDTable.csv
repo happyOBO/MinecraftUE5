@@ -5,5 +5,5 @@ RowName,ID,Recipe,WieldableItemPath
 3,3,"""""",Blueprint'/Game/Assets/Blueprints/Wieldables/Wieldable_Block_Stone.Wieldable_Block_Stone'
 4,4,"""""",Blueprint'/Game/Assets/Blueprints/Wieldables/Wieldable_Block_Iron.Wieldable_Block_Iron'
 5,5,"""2/2/2/0/2/0/0/2/0/""",Blueprint'/Game/Assets/Blueprints/Wieldables/Wieldable_Pickaxe_Wooden.Wieldable_Pickaxe_Wooden'
-6,6,"""3/3/3/0/2/0/0/2/0""",Blueprint'/Game/Assets/Blueprints/Wieldables/Wieldable_Pickaxe_Stone.Wieldable_Pickaxe_Stone'
-7,7,"""4/4/4/0/2/0/0/2/0""",Blueprint'/Game/Assets/Blueprints/Wieldables/Wieldable_Pickaxe_Iron.Wieldable_Pickaxe_Iron'
+6,6,"""3/3/3/0/2/0/0/2/0/""",Blueprint'/Game/Assets/Blueprints/Wieldables/Wieldable_Pickaxe_Stone.Wieldable_Pickaxe_Stone'
+7,7,"""4/4/4/0/2/0/0/2/0/""",Blueprint'/Game/Assets/Blueprints/Wieldables/Wieldable_Pickaxe_Iron.Wieldable_Pickaxe_Iron'
