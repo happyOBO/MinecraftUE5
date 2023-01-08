@@ -1,9 +1,9 @@
 RowName,ID,Recipe,WieldableItemPath
-0,0,"""""",""""""
-1,1,"""""",Blueprint'/Game/Assets/Blueprints/Wieldables/Wieldable_Block_Grass.Wieldable_Block_Grass'
-2,2,"""""",Blueprint'/Game/Assets/Blueprints/Wieldables/Wieldable_Block_Wood.Wieldable_Block_Wood'
-3,3,"""""",Blueprint'/Game/Assets/Blueprints/Wieldables/Wieldable_Block_Stone.Wieldable_Block_Stone'
-4,4,"""""",Blueprint'/Game/Assets/Blueprints/Wieldables/Wieldable_Block_Iron.Wieldable_Block_Iron'
-5,5,"""2/2/2/0/2/0/0/2/0/""",Blueprint'/Game/Assets/Blueprints/Wieldables/Wieldable_Pickaxe_Wooden.Wieldable_Pickaxe_Wooden'
-6,6,"""3/3/3/0/2/0/0/2/0/""",Blueprint'/Game/Assets/Blueprints/Wieldables/Wieldable_Pickaxe_Stone.Wieldable_Pickaxe_Stone'
-7,7,"""4/4/4/0/2/0/0/2/0/""",Blueprint'/Game/Assets/Blueprints/Wieldables/Wieldable_Pickaxe_Iron.Wieldable_Pickaxe_Iron'
+0,0,,
+1,1,,/Game/Assets/Blueprints/Wieldables/Wieldable_Block_Grass.Wieldable_Block_Grass_C
+2,2,,/Game/Assets/Blueprints/Wieldables/Wieldable_Block_Wood.Wieldable_Block_Wood_C
+3,3,,/Game/Assets/Blueprints/Wieldables/Wieldable_Block_Stone.Wieldable_Block_Stone_C
+4,4,,/Game/Assets/Blueprints/Wieldables/Wieldable_Block_Iron.Wieldable_Block_Iron_C
+5,5,2/2/2/0/2/0/0/2/0/,/Game/Assets/Blueprints/Wieldables/Wieldable_Pickaxe_Wooden.Wieldable_Pickaxe_Wooden_C
+6,6,3/3/3/0/2/0/0/2/0/,/Game/Assets/Blueprints/Wieldables/Wieldable_Pickaxe_Stone.Wieldable_Pickaxe_Stone_C
+7,7,4/4/4/0/2/0/0/2/0/,/Game/Assets/Blueprints/Wieldables/Wieldable_Pickaxe_Iron.Wieldable_Pickaxe_Iron_C

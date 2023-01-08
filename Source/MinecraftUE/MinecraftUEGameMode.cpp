@@ -18,13 +18,15 @@ AMinecraftUEGameMode::AMinecraftUEGameMode()
 	
 	// use our custom HUD class
 	HUDClass = AMinecraftUEHUD::StaticClass();
+
+	LoadWieldableInfo();
 }
 
 void AMinecraftUEGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	LoadWieldableInfo();
+	
 }
 
 UDataTable* AMinecraftUEGameMode::LoadObjFromPath(const FName& Path)
@@ -44,7 +46,7 @@ void AMinecraftUEGameMode::LoadWieldableInfo()
 
 	for (int32 i = 0; i < WieldableInfoTable.Num(); i++)
 	{
-		WieldableInfo.FindOrAdd(WieldableInfoTable[i]->ID,WieldableInfoTable[i]->WieldableItemPath);
+		WieldableInfo.FindOrAdd(WieldableInfoTable[i]->ID, LoadWieldableItemClass(WieldableInfoTable[i]->WieldableItemPath));
 		if(0 < WieldableInfoTable[i]->Recipe.Len() )
 			WieldableItemRecipe.FindOrAdd(WieldableInfoTable[i]->Recipe, WieldableInfoTable[i]->ID);
 	}
@@ -56,25 +58,27 @@ void AMinecraftUEGameMode::LoadWieldableInfo()
 
 AWieldable* AMinecraftUEGameMode::GetWieldableItemFromID(int32 ID)
 {
-	if (!WieldableInfo.Contains(ID)) return nullptr;
-	FString ItemPath = WieldableInfo[ID];
-	return LoadObject<AWieldable>(NULL, *ItemPath, NULL, LOAD_None, NULL);
+	return nullptr;
 }
 
 
-TSubclassOf<AWieldable> AMinecraftUEGameMode::GetWieldableItemClassFromID(int32 ID)
+TSubclassOf<AWieldable> AMinecraftUEGameMode::LoadWieldableItemClass(FString WieldableItemPath)
 {
-	if (!WieldableInfo.Contains(ID)) return nullptr;
-	FString ItemPath = WieldableInfo[ID];
-	static ConstructorHelpers::FClassFinder<AWieldable> WieldableClassAsset(*ItemPath);
+	ConstructorHelpers::FClassFinder<AWieldable> WieldableClassAsset(*WieldableItemPath);
 	if (WieldableClassAsset.Succeeded())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("[jeongmj] GetWieldableItemClassFromID %d"), ID);
 		return WieldableClassAsset.Class;
 	}
 
 	return nullptr;
 }
+
+TSubclassOf<AWieldable> AMinecraftUEGameMode::GetWieldableItemClassFromID(int32 ID)
+{
+	if (!WieldableInfo.Contains(ID)) return nullptr;
+	return WieldableInfo[ID];
+}
+
 
 int32 AMinecraftUEGameMode::GetWieldableItemIDFromRecipe(FString Recipe)
 {

@@ -18,11 +18,12 @@ public:
 	AMinecraftUEGameMode();
 
 	UPROPERTY()
-	TMap<int32, FString> WieldableInfo;
+	TMap<int32, TSubclassOf<AWieldable>> WieldableInfo;
 	UPROPERTY()
 	TMap<FString, int32> WieldableItemRecipe;
 
 	AWieldable* GetWieldableItemFromID(int32 ID);
+	TSubclassOf<AWieldable> LoadWieldableItemClass(FString ID);
 	TSubclassOf<AWieldable> GetWieldableItemClassFromID(int32 ID);
 	int32 GetWieldableItemIDFromRecipe(FString Recipe);
 
