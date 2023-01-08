@@ -558,17 +558,16 @@ void AMinecraftUECharacter::UpdatePossibleCraftWeildable()
 
 	if (CraftInputs.Len() <= 0) return;
 
-	UE_LOG(LogTemp, Warning, TEXT("[jeongmj] UpdatePossibleCraftWeildable %s"), *CraftInputs);
-
 	int32 CraftWieldableItemID = MGameMode->GetWieldableItemIDFromRecipe(CraftInputs);
 
-	UE_LOG(LogTemp, Warning, TEXT("[jeongmj] CraftWieldableItemID %d"), CraftWieldableItemID);
+	
 	if (CraftWieldableItemID <= 0)
 	{
 		PossibleWieldable = nullptr;
 		return;
 	}
-	MGameMode->GetWieldableItemClassFromID(CraftWieldableItemID);
+
+	PossibleWieldable = MGameMode->GetWieldableItemClassFromID(CraftWieldableItemID);
 }
 
 void AMinecraftUECharacter::ServerBreakBlock_Implementation(ABlock* block, AWieldable* CurrentWieldable)
