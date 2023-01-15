@@ -98,7 +98,7 @@ void AMinecraftUECharacter::Tick(float DeltaTime)
 
 	CheckForBlocks();
 
-	UpdatePossibleCraftWeildable();
+	// UpdatePossibleCraftWeildable();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -225,6 +225,7 @@ bool AMinecraftUECharacter::MoveToCraftInventory(uint8 fromInventoryIdx, uint8 t
 		return false;
 	CraftInventory[toCraftInventoryIdx] = Inventory[fromInventoryIdx];
 	Inventory[fromInventoryIdx] = nullptr;
+	UpdatePossibleCraftWeildable();
 	return true;
 }
 
@@ -232,17 +233,13 @@ bool AMinecraftUECharacter::MoveToInventory(uint8 fromCraftInventoryIdx)
 {
 	if (fromCraftInventoryIdx < 0 || NUM_OF_CRAFT_INVENTORY_SLOTS <= fromCraftInventoryIdx)
 		return false;
-
 	const int32 AvailableSlot = Inventory.Find(nullptr);
-	if (AvailableSlot != INDEX_NONE)
-	{
-		Inventory[AvailableSlot] = CraftInventory[fromCraftInventoryIdx];
-		CraftInventory[fromCraftInventoryIdx] = nullptr;
-		return true;
-	}
-	else
+	if (AvailableSlot == INDEX_NONE)
 		return false;
-
+	Inventory[AvailableSlot] = CraftInventory[fromCraftInventoryIdx];
+	CraftInventory[fromCraftInventoryIdx] = nullptr;
+	UpdatePossibleCraftWeildable();
+	return true;
 }
 
 bool AMinecraftUECharacter::GetCraftWeidable(uint8 toInventoryIdx)
