@@ -25,7 +25,6 @@ AMinecraftUEGameMode::AMinecraftUEGameMode()
 void AMinecraftUEGameMode::BeginPlay()
 {
 	Super::BeginPlay();
-
 }
 
 UDataTable* AMinecraftUEGameMode::LoadObjFromPath(const FName& Path)
@@ -40,8 +39,10 @@ void AMinecraftUEGameMode::LoadWieldableInfo()
 {
 	FString context;
 	UDataTable* WieldableInfoDataTable = LoadObjFromPath(TEXT("DataTable'/Game/DataTable/WieldableIDTable.WieldableIDTable'"));
+	
 	TArray<FWieldableData*> WieldableInfoTable;
-	WieldableInfoDataTable->GetAllRows(context, WieldableInfoTable);
+	if (WieldableInfoDataTable != nullptr)
+		WieldableInfoDataTable->GetAllRows(context, WieldableInfoTable);
 
 	for (int32 i = 0; i < WieldableInfoTable.Num(); i++)
 	{

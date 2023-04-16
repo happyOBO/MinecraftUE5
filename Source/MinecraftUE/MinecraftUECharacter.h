@@ -249,12 +249,6 @@ private:
 	/* 현재 Craft Tool 로 만들 수 있는 Weildable*/
 	TSubclassOf<class AWieldable> PossibleWieldable;
 
-public: 
-	/* 플레이어가 사용하는 도구 유형 및 등급 */
-	uint8 ToolType;
-	uint8 MaterialType;
-
-
 public:
 	/** Returns Mesh1P subobject **/
 	USkeletalMeshComponent* GetMesh1P() const { return Mesh1P; }

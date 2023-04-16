@@ -351,15 +351,10 @@ void AMinecraftUECharacter::UpdateWieldedItem()
 	if (Inventory[CurrentInventorySlot] != nullptr)
 	{
 		FP_WieldedItem->SetSkeletalMesh(Inventory[CurrentInventorySlot]->WieldableMesh->SkeletalMesh);
-		ToolType = Inventory[CurrentInventorySlot]->ToolType;
-		MaterialType = Inventory[CurrentInventorySlot]->MaterialType;
-
 	}
 	else
 	{
 		FP_WieldedItem->SetSkeletalMesh(NULL);
-		ToolType = AWieldable::ETool::Unarmed;
-		MaterialType = AWieldable::EMaterial::None;
 	}
 }
 
@@ -452,9 +447,12 @@ void AMinecraftUECharacter::OnHit()
 		AWieldable* CurrentWieldableItem = GetCurrentWieldableItem();
 		if (CurrentWieldableItem)
 		{
+			UE_LOG(LogTemp, Warning, TEXT("TimerBetweenBreaks %f"), TimerBetweenBreaks);
+			UE_LOG(LogTemp, Warning, TEXT("CurrentWieldableItem->ToolSpeed %f"), CurrentWieldableItem->ToolSpeed);
 			TimerBetweenBreaks = FMath::Max(CurrentWieldableItem->ToolSpeed, 0.1f);
 		}
 		// 타이머 지정 , 1. 블럭 깨지는 시간 2. 플레이어 스윙 애니메이션 유지 시간
+		
 		GetWorld()->GetTimerManager().SetTimer(BlockBreakingHandle, this, &AMinecraftUECharacter::BreakBlock, TimerBetweenBreaks, true);
 		GetWorld()->GetTimerManager().SetTimer(HitAnimHandle, this, &AMinecraftUECharacter::PlayHitAnim, 0.4f, true); // 스윙질 할때 클릭 빨리누르던 느리게 누르던 0.4초로 고정
 	
@@ -575,8 +573,13 @@ void AMinecraftUECharacter::ServerBreakBlock_Implementation(ABlock* block, AWiel
 
 AWieldable* AMinecraftUECharacter::GetCurrentWieldableItem()
 {
-	if (0 <= CurrentInventorySlot && NUM_OF_INVENTORY_SHORTCUT_SLOTS < CurrentInventorySlot)
+	
+	if (0 <= CurrentInventorySlot && CurrentInventorySlot < NUM_OF_INVENTORY_SHORTCUT_SLOTS)
 	{
+		if (Inventory[CurrentInventorySlot] != nullptr)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Inventory[CurrentInventorySlot]  %s"), *Inventory[CurrentInventorySlot]->GetName());
+		}
 		return Inventory[CurrentInventorySlot];
 	}
 	return nullptr;

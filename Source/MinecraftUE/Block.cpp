@@ -39,6 +39,7 @@ void ABlock::Break(AWieldable* WieldableItem)
 
 	else if (WieldableItem && 0.f < WieldableItem->ToolPower)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("WieldableItem->ToolPower %d"), WieldableItem->ToolPower);
 		BreakingStage = FMath::Min(DefaultBreakingStage, BreakingStage - (1.0f + WieldableItem->ToolPower));
 	}
 	else
