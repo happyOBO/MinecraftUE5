@@ -356,6 +356,11 @@ void AMinecraftUECharacter::UpdateWieldedItem()
 	{
 		FP_WieldedItem->SetSkeletalMesh(NULL);
 	}
+
+	if (GetNetMode() != NM_DedicatedServer)
+	{
+		ServerUpdateWieldedItem(Inventory[CurrentInventorySlot]);
+	}
 }
 
 AWieldable* AMinecraftUECharacter::GetCurrentlyWieldedItem()
@@ -570,6 +575,18 @@ void AMinecraftUECharacter::ServerBreakBlock_Implementation(ABlock* block, AWiel
 	block->Break(CurrentWieldable);
 }
 
+
+void AMinecraftUECharacter::ServerUpdateWieldedItem_Implementation(AWieldable* WieldableItem)
+{
+	if (WieldableItem != nullptr)
+	{
+		FP_WieldedItem->SetSkeletalMesh(WieldableItem->WieldableMesh->SkeletalMesh);
+	}
+	else
+	{
+		FP_WieldedItem->SetSkeletalMesh(NULL);
+	}
+}
 
 AWieldable* AMinecraftUECharacter::GetCurrentWieldableItem()
 {

@@ -249,6 +249,9 @@ private:
 	/* 현재 Craft Tool 로 만들 수 있는 Weildable*/
 	TSubclassOf<class AWieldable> PossibleWieldable;
 
+	UFUNCTION(Server, Reliable)
+	void ServerUpdateWieldedItem(AWieldable* WieldableItem);
+
 public:
 	/** Returns Mesh1P subobject **/
 	USkeletalMeshComponent* GetMesh1P() const { return Mesh1P; }
